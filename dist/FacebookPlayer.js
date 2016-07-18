@@ -59,6 +59,11 @@ var FacebookPlayer = function (_Component) {
       var _this$props = _this.props;
       var id = _this$props.id;
       var appId = _this$props.appId;
+      var allowfullscreen = _this$props.allowfullscreen;
+      var autoplay = _this$props.autoplay;
+      var width = _this$props.width;
+      var showText = _this$props.showText;
+      var showCaptions = _this$props.showCaptions;
       var onReady = _this$props.onReady;
 
       var FB = _this.FB;
@@ -73,8 +78,11 @@ var FacebookPlayer = function (_Component) {
       playerDiv.classList.add('fb-video');
       playerDiv.id = playerId;
       playerDiv.setAttribute('data-href', 'https://www.facebook.com/facebook/videos/' + videoId);
-      playerDiv.setAttribute('data-width', '500');
-      playerDiv.setAttribute('data-allowfullscreen', 'true');
+      playerDiv.setAttribute('data-allowfullscreen', allowfullscreen || 'false');
+      playerDiv.setAttribute('data-autoplay', autoplay || 'false');
+      playerDiv.setAttribute('data-width', width || 'auto');
+      playerDiv.setAttribute('data-show-text', showText || 'false');
+      playerDiv.setAttribute('data-show-captions', showCaptions || 'false');
 
       _this.container.appendChild(playerDiv);
 
@@ -151,8 +159,8 @@ var FacebookPlayer = function (_Component) {
 
 
   _createClass(FacebookPlayer, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       var _this2 = this;
 
       var videoId = this.props.videoId;
@@ -244,6 +252,11 @@ FacebookPlayer.propTypes = {
   className: _react.PropTypes.string,
   appId: _react.PropTypes.string.isRequired,
   videoId: _react.PropTypes.string.isRequired,
+  width: _react.PropTypes.number,
+  allowfullscreen: _react.PropTypes.string,
+  autoplay: _react.PropTypes.string,
+  showText: _react.PropTypes.string,
+  showCaptions: _react.PropTypes.string,
   onReady: _react.PropTypes.func,
   onStartedPlaying: _react.PropTypes.func,
   onPaused: _react.PropTypes.func,
