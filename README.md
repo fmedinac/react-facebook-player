@@ -15,19 +15,19 @@ $ npm install react-facebook-player
 const FacebookPlayer = require('react-facebook-player');
 
 <FacebookPlayer
-	appId={ string } 										# (required) Your Facebook App ID. Ref: http://bit.ly/1GNA0AN
-	videoId={ string } 									# (required) Video´s ID Ref: http://bit.ly/1ysgVu4
-	id={ string } 											# Element ID. Required if you wanna use more than one video in the same page.
-	className={ string }								# Element class.
-	/* EVENTS. Ref: http://bit.ly/29JaA7J */
-	onReady={ function } 								# Returns a player object to be used for controlling
+  appId={ string }                                    # (required) Your Facebook App ID. Ref: http://bit.ly/1GNA0AN
+  videoId={ string }                                  # (required) Video´s ID Ref: http://bit.ly/1ysgVu4
+  id={ string }                                       # Element ID. Required if you wanna use more than one video in the same page.
+  className={ string }                                # Element class.
+  /* EVENTS. Ref: http://bit.ly/29JaA7J */
+  onReady={ function }                                # Returns a player object to be used for controlling
   onStartedPlaying={ function }
   onPaused={ function }
   onFinishedPlaying={ function }
   onStartedBuffering={ function }
   onFinishedBuffering={ function }
   onError={ function }
-	/>
+  />
 ```
 
 You can use onReady() to assign the player to a state and then control it (http://bit.ly/29Oxmgm).
@@ -53,17 +53,17 @@ class Example extends React.Component {
   }
 
   playVideo = () => {
-	  const { player } = this.state;
+    const { player } = this.state;
     if (player) player.play();
   }
 
   pauseVideo = () => {
-	  const { player } = this.state;
+    const { player } = this.state;
     if (player) player.pause();
   }
 
   render() {
-  	const { videoId, appId } = this.props;
+    const { videoId, appId } = this.props;
     return (
       <div>
         <FacebookPlayer
