@@ -6,6 +6,8 @@ class FacebookPlayer extends Component {
     className: PropTypes.string,
     appId: PropTypes.string.isRequired,
     videoId: PropTypes.string.isRequired,
+    width: PropTypes.number,
+    height: PropTypes.number,
     onReady: PropTypes.func,
     onStartedPlaying: PropTypes.func,
     onPaused: PropTypes.func,
@@ -57,7 +59,7 @@ class FacebookPlayer extends Component {
   /**
    * Load Facebook SDK and set FB to global vars
    */
-  componentWillMount() {
+  componentDidMount() {
     const {
       videoId,
     } = this.props;
@@ -121,6 +123,8 @@ class FacebookPlayer extends Component {
       id,
       appId,
       onReady,
+      width,
+      height,
     } = this.props;
     const FB = this.FB;
 
@@ -134,7 +138,8 @@ class FacebookPlayer extends Component {
     playerDiv.classList.add('fb-video');
     playerDiv.id = playerId;
     playerDiv.setAttribute('data-href', 'https://www.facebook.com/facebook/videos/' + videoId);
-    playerDiv.setAttribute('data-width', '500');
+    playerDiv.setAttribute('data-width', width || 500);
+    playerDiv.setAttribute('data-height', height || 350);
     playerDiv.setAttribute('data-allowfullscreen', 'true');
 
     this.container.appendChild(playerDiv);
