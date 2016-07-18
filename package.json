@@ -1,8 +1,8 @@
 {
   "name": "react-facebook-player",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "React component for Facebook embedded videos API",
-  "main": "dist/ReactFacebookVideo.js",
+  "main": "dist/FacebookPlayer.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fmedinac/react-facebook-player.git"
