@@ -16,7 +16,7 @@ const FacebookPlayer = require('react-facebook-player');
 
 <FacebookPlayer
 	appId={ string } 										# (required) Your Facebook App ID. Ref: http://bit.ly/1GNA0AN
-	videoId={ string } 									# (required) Video's ID Ref: http://bit.ly/1ysgVu4
+	videoId={ string } 									# (required) Video´s ID Ref: http://bit.ly/1ysgVu4
 	id={ string } 											# Element ID. Required if you wanna use more than one video in the same page.
 	className={ string }								# Element class.
 	/* EVENTS. Ref: http://bit.ly/29JaA7J */
