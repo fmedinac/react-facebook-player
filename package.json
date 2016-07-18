@@ -1,6 +1,6 @@
 {
   "name": "react-facebook-player",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React component for Facebook embedded videos API",
   "main": "dist/FacebookPlayer.js",
   "repository": {
