@@ -62,13 +62,15 @@ class FacebookPlayer extends Component {
       videoId,
     } = this.props;
 
-    this.loadFB()
-      .then(res => {
-        if (res) {
-          this.FB = res;
-          this.createPlayer(videoId);
-        }
-      });
+    if (typeof window !== "undefined") {
+      this.loadFB()
+        .then(res => {
+          if (res) {
+            this.FB = res;
+            this.createPlayer(videoId);
+          }
+        });
+    }
   }
 
   /**
@@ -91,26 +93,22 @@ class FacebookPlayer extends Component {
    * Load Facebook SDK if it is not loaded already.
    */
   loadFB = () => {
-    if (typeof window !== undefined) {
-      if(window.FB) {
-        return new Promise(resolve => resolve(window.FB));
-      }
-
-      return new Promise(resolve => {
-        (function(d, s, id){
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
-          js.onload = function() {
-            resolve(window.FB);
-          }
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-      });
-    } else {
-      return new Promise(resolve => resolve(false));
+    if(window.FB) {
+      return new Promise(resolve => resolve(window.FB));
     }
+
+    return new Promise(resolve => {
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+        js.onload = function() {
+          resolve(window.FB);
+        }
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    });
   }
 
   /**
