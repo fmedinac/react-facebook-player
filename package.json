@@ -16,7 +16,7 @@
     "react-component"
   ],
   "author": "Felipe Medina",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fmedinac/react-facebook-player/issues"
   },
@@ -54,7 +54,7 @@
   "scripts": {
     "test": "mocha",
     "compile": "babel src --out-dir dist",
-    "prepublish": "npm run compile -- -w",
+    "prepublish": "npm run compile",
     "lint": "eslint src",
     "example": "webpack-dev-server --config example/webpack.config.js"
   }
