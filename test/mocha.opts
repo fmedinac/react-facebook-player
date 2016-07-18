@@ -1,0 +1,5 @@
+test/*-test.js
+--compilers js:babel-core/register
+--require ./test/helpers/setupEnvironment.js
+-R spec
+--ui bdd
