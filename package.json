@@ -55,6 +55,7 @@
     "test": "mocha",
     "compile": "babel src --out-dir dist",
     "prepublish": "npm run compile",
+    "watch": "npm run compile -- -w",
     "lint": "eslint src",
     "example": "webpack-dev-server --config example/webpack.config.js"
   }
