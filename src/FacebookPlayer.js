@@ -30,27 +30,27 @@ class FacebookPlayer extends Component {
     this.eventsToListen = [
       {
         event: 'startedPlaying',
-        listener: this.props.onStartedPlaying,
+        listener: (player) => this.props.onStartedPlaying(this.props.id),
       },
       {
         event: 'paused',
-        listener: this.props.onPaused,
+        listener: () => this.props.onPaused(this.props.id),
       },
       {
         event: 'finishedPlaying',
-        listener: this.props.onFinishedPlaying,
+        listener: () => this.props.onFinishedPlaying(this.props.id),
       },
       {
         event: 'startedBuffering',
-        listener: this.props.onStartedBuffering,
+        listener: () => this.props.onStartedBuffering(this.props.id),
       },
       {
         event: 'finishedBuffering',
-        listener: this.props.onFinishedBuffering,
+        listener: () => this.props.onFinishedBuffering(this.props.id),
       },
       {
         event: 'error',
-        listener: this.props.onError,
+        listener: () => this.props.onError(this.props.id),
       },
     ];
 
@@ -91,7 +91,7 @@ class FacebookPlayer extends Component {
    * Kill all event listeners
    */
   componentWillUnmount() {
-    this.unsubscribe();
+    // this.unsubscribe();
   }
 
   /**
@@ -103,13 +103,16 @@ class FacebookPlayer extends Component {
     }
 
     return new Promise(resolve => {
+      window.fbAsyncInit = function() {
+        return resolve(window.FB);
+      };
       (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
         js.onload = function() {
-          resolve(window.FB);
+          return resolve(window.FB);
         }
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
@@ -138,7 +141,7 @@ class FacebookPlayer extends Component {
 
     // Clear
     this.container.innerHTML = '';
-    this.unsubscribe();
+    // this.unsubscribe();
 
     const playerDiv = document.createElement('div');
     playerDiv.classList.add('fb-video');
@@ -160,6 +163,7 @@ class FacebookPlayer extends Component {
 
 
     FB.Event.subscribe('xfbml.ready', msg => {
+      window.msg = msg;
       if (msg.type === 'video' &&
           (
             (id && msg.id === playerId) ||
@@ -169,7 +173,7 @@ class FacebookPlayer extends Component {
         this.videoPlayer = msg.instance;
 
         // Dispatch ready event
-        if (onReady) onReady(this.videoPlayer);
+        if (onReady) onReady(id, this.videoPlayer);
 
         // Subscribe to events
         this.subscribe();
@@ -183,10 +187,13 @@ class FacebookPlayer extends Component {
   subscribe = () => {
     this.eventHandlers = [];
     this.eventsToListen.map(ev => {
-      if (ev.listener) this.eventHandlers.push({
-        event: ev.event,
-        handler: this.videoPlayer.subscribe(ev.event, ev.listener)
-      });
+      if (ev.listener) {
+        const handler = this.videoPlayer.subscribe(ev.event, ev.listener);
+        this.eventHandlers.push({
+          event: ev.event,
+          handler,
+        })
+      };
     });
   }
 
@@ -196,7 +203,7 @@ class FacebookPlayer extends Component {
   unsubscribe = () => {
     if (this.eventHandlers && this.eventHandlers.length) {
       this.eventHandlers.map(ev => {
-        ev.handler.removeListener(ev.event);
+        if (ev.handler.removeListener) ev.handler.removeListener(ev.event);
       });
     }
   }

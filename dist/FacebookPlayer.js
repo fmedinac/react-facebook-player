@@ -39,6 +39,9 @@ var FacebookPlayer = function (_Component) {
       }
 
       return new Promise(function (resolve) {
+        window.fbAsyncInit = function () {
+          return resolve(window.FB);
+        };
         (function (d, s, id) {
           var js,
               fjs = d.getElementsByTagName(s)[0];
@@ -48,7 +51,7 @@ var FacebookPlayer = function (_Component) {
           js = d.createElement(s);js.id = id;
           js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
           js.onload = function () {
-            resolve(window.FB);
+            return resolve(window.FB);
           };
           fjs.parentNode.insertBefore(js, fjs);
         })(document, 'script', 'facebook-jssdk');
@@ -72,7 +75,7 @@ var FacebookPlayer = function (_Component) {
 
       // Clear
       _this.container.innerHTML = '';
-      _this.unsubscribe();
+      // this.unsubscribe();
 
       var playerDiv = document.createElement('div');
       playerDiv.classList.add('fb-video');
@@ -93,11 +96,12 @@ var FacebookPlayer = function (_Component) {
       });
 
       FB.Event.subscribe('xfbml.ready', function (msg) {
+        window.msg = msg;
         if (msg.type === 'video' && (id && msg.id === playerId || !id)) {
           _this.videoPlayer = msg.instance;
 
           // Dispatch ready event
-          if (onReady) onReady(_this.videoPlayer);
+          if (onReady) onReady(id, _this.videoPlayer);
 
           // Subscribe to events
           _this.subscribe();
@@ -108,17 +112,20 @@ var FacebookPlayer = function (_Component) {
     _this.subscribe = function () {
       _this.eventHandlers = [];
       _this.eventsToListen.map(function (ev) {
-        if (ev.listener) _this.eventHandlers.push({
-          event: ev.event,
-          handler: _this.videoPlayer.subscribe(ev.event, ev.listener)
-        });
+        if (ev.listener) {
+          var handler = _this.videoPlayer.subscribe(ev.event, ev.listener);
+          _this.eventHandlers.push({
+            event: ev.event,
+            handler: handler
+          });
+        };
       });
     };
 
     _this.unsubscribe = function () {
       if (_this.eventHandlers && _this.eventHandlers.length) {
         _this.eventHandlers.map(function (ev) {
-          ev.handler.removeListener(ev.event);
+          if (ev.handler.removeListener) ev.handler.removeListener(ev.event);
         });
       }
     };
@@ -129,22 +136,34 @@ var FacebookPlayer = function (_Component) {
 
     _this.eventsToListen = [{
       event: 'startedPlaying',
-      listener: _this.props.onStartedPlaying
+      listener: function listener(player) {
+        return _this.props.onStartedPlaying(_this.props.id);
+      }
     }, {
       event: 'paused',
-      listener: _this.props.onPaused
+      listener: function listener() {
+        return _this.props.onPaused(_this.props.id);
+      }
     }, {
       event: 'finishedPlaying',
-      listener: _this.props.onFinishedPlaying
+      listener: function listener() {
+        return _this.props.onFinishedPlaying(_this.props.id);
+      }
     }, {
       event: 'startedBuffering',
-      listener: _this.props.onStartedBuffering
+      listener: function listener() {
+        return _this.props.onStartedBuffering(_this.props.id);
+      }
     }, {
       event: 'finishedBuffering',
-      listener: _this.props.onFinishedBuffering
+      listener: function listener() {
+        return _this.props.onFinishedBuffering(_this.props.id);
+      }
     }, {
       event: 'error',
-      listener: _this.props.onError
+      listener: function listener() {
+        return _this.props.onError(_this.props.id);
+      }
     }];
 
     _this.FB = null;
@@ -194,9 +213,9 @@ var FacebookPlayer = function (_Component) {
 
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unsubscribe();
-    }
+    value: function componentWillUnmount() {}
+    // this.unsubscribe();
+
 
     /**
      * Load Facebook SDK if it is not loaded already.
