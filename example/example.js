@@ -54,6 +54,7 @@ class Example extends React.Component {
           appId={ appId }
           onReady={ this.onReady }
           onStartedPlaying={ this.onStartedPlaying }
+          width={ 500 }
           />
         <button onClick={this.onPlayVideo}>Play</button>
         <button onClick={this.onPauseVideo}>Pause</button>
