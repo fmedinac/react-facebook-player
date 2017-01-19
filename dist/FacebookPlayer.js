@@ -136,34 +136,34 @@ var FacebookPlayer = function (_Component) {
 
     _this.eventsToListen = [{
       event: 'startedPlaying',
-      listener: function listener(player) {
+      listener: (_this.props.onStartedPlaying) ? function listener(player) {
         return _this.props.onStartedPlaying(_this.props.id);
-      }
+      } : null
     }, {
       event: 'paused',
-      listener: function listener() {
+      listener: (_this.props.onPaused) ? function listener() {
         return _this.props.onPaused(_this.props.id);
-      }
+      } : null
     }, {
       event: 'finishedPlaying',
-      listener: function listener() {
+      listener: (_this.props.onFinishedPlaying) ? function listener() {
         return _this.props.onFinishedPlaying(_this.props.id);
-      }
+      } : null
     }, {
       event: 'startedBuffering',
-      listener: function listener() {
+      listener: (_this.props.onStartedBuffering) ? function listener() {
         return _this.props.onStartedBuffering(_this.props.id);
-      }
+      } : null
     }, {
       event: 'finishedBuffering',
-      listener: function listener() {
+      listener: (_this.props.onFinishedBuffering) ? function listener() {
         return _this.props.onFinishedBuffering(_this.props.id);
-      }
+      } : null
     }, {
       event: 'error',
-      listener: function listener() {
+      listener: (_this.props.onError) ? function listener() {
         return _this.props.onError(_this.props.id);
-      }
+      } : null
     }];
 
     _this.FB = null;
