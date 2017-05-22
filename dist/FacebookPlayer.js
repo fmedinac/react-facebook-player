@@ -10,6 +10,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18,8 +20,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var FacebookPlayer = function (_Component) {
-  _inherits(FacebookPlayer, _Component);
+var FacebookPlayer = function (_React$Component) {
+  _inherits(FacebookPlayer, _React$Component);
 
   function FacebookPlayer(props) {
     _classCallCheck(this, FacebookPlayer);
@@ -28,8 +30,7 @@ var FacebookPlayer = function (_Component) {
      * Set events that will be added to listen list.
      * REF: https://developers.facebook.com/docs/plugins/embedded-video-player/api#event-reference
      */
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FacebookPlayer).call(this, props));
+    var _this = _possibleConstructorReturn(this, (FacebookPlayer.__proto__ || Object.getPrototypeOf(FacebookPlayer)).call(this, props));
 
     _this.loadFB = function () {
       if (window.FB) {
@@ -59,15 +60,15 @@ var FacebookPlayer = function (_Component) {
     };
 
     _this.createPlayer = function (videoId) {
-      var _this$props = _this.props;
-      var id = _this$props.id;
-      var appId = _this$props.appId;
-      var allowfullscreen = _this$props.allowfullscreen;
-      var autoplay = _this$props.autoplay;
-      var width = _this$props.width;
-      var showText = _this$props.showText;
-      var showCaptions = _this$props.showCaptions;
-      var onReady = _this$props.onReady;
+      var _this$props = _this.props,
+          id = _this$props.id,
+          appId = _this$props.appId,
+          allowfullscreen = _this$props.allowfullscreen,
+          autoplay = _this$props.autoplay,
+          width = _this$props.width,
+          showText = _this$props.showText,
+          showCaptions = _this$props.showCaptions,
+          onReady = _this$props.onReady;
 
       var FB = _this.FB;
 
@@ -136,32 +137,32 @@ var FacebookPlayer = function (_Component) {
 
     _this.eventsToListen = [{
       event: 'startedPlaying',
-      listener: (_this.props.onStartedPlaying) ? function listener(player) {
+      listener: props.onStartedPlaying ? function () {
         return _this.props.onStartedPlaying(_this.props.id);
       } : null
     }, {
       event: 'paused',
-      listener: (_this.props.onPaused) ? function listener() {
+      listener: props.onStartedPlaying ? function () {
         return _this.props.onPaused(_this.props.id);
       } : null
     }, {
       event: 'finishedPlaying',
-      listener: (_this.props.onFinishedPlaying) ? function listener() {
+      listener: props.onFinishedPlaying ? function () {
         return _this.props.onFinishedPlaying(_this.props.id);
       } : null
     }, {
       event: 'startedBuffering',
-      listener: (_this.props.onStartedBuffering) ? function listener() {
+      listener: props.onStartedBuffering ? function () {
         return _this.props.onStartedBuffering(_this.props.id);
       } : null
     }, {
       event: 'finishedBuffering',
-      listener: (_this.props.onFinishedBuffering) ? function listener() {
+      listener: props.onFinishedBuffering ? function () {
         return _this.props.onFinishedBuffering(_this.props.id);
       } : null
     }, {
       event: 'error',
-      listener: (_this.props.onError) ? function listener() {
+      listener: props.onError ? function () {
         return _this.props.onError(_this.props.id);
       } : null
     }];
@@ -246,9 +247,9 @@ var FacebookPlayer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var id = _props.id;
-      var className = _props.className;
+      var _props = this.props,
+          id = _props.id,
+          className = _props.className;
 
 
       return _react2.default.createElement(
@@ -264,24 +265,24 @@ var FacebookPlayer = function (_Component) {
   }]);
 
   return FacebookPlayer;
-}(_react.Component);
+}(_react2.default.Component);
 
 FacebookPlayer.propTypes = {
-  id: _react.PropTypes.string,
-  className: _react.PropTypes.string,
-  appId: _react.PropTypes.string.isRequired,
-  videoId: _react.PropTypes.string.isRequired,
-  width: _react.PropTypes.number,
-  allowfullscreen: _react.PropTypes.string,
-  autoplay: _react.PropTypes.string,
-  showText: _react.PropTypes.string,
-  showCaptions: _react.PropTypes.string,
-  onReady: _react.PropTypes.func,
-  onStartedPlaying: _react.PropTypes.func,
-  onPaused: _react.PropTypes.func,
-  onFinishedPlaying: _react.PropTypes.func,
-  onStartedBuffering: _react.PropTypes.func,
-  onFinishedBuffering: _react.PropTypes.func,
-  onError: _react.PropTypes.func
+  id: _propTypes.string,
+  className: _propTypes.string,
+  appId: _propTypes.string.isRequired,
+  videoId: _propTypes.string.isRequired,
+  width: _propTypes.number,
+  allowfullscreen: _propTypes.string,
+  autoplay: _propTypes.string,
+  showText: _propTypes.string,
+  showCaptions: _propTypes.string,
+  onReady: _propTypes.func,
+  onStartedPlaying: _propTypes.func,
+  onPaused: _propTypes.func,
+  onFinishedPlaying: _propTypes.func,
+  onStartedBuffering: _propTypes.func,
+  onFinishedBuffering: _propTypes.func,
+  onError: _propTypes.func
 };
 exports.default = FacebookPlayer;

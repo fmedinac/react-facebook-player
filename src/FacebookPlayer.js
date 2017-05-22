@@ -18,7 +18,7 @@ class FacebookPlayer extends React.Component {
     onFinishedPlaying: func,
     onStartedBuffering: func,
     onFinishedBuffering: func,
-    onError: func
+    onError: func,
   };
 
   constructor(props) {
@@ -31,27 +31,39 @@ class FacebookPlayer extends React.Component {
     this.eventsToListen = [
       {
         event: 'startedPlaying',
-        listener: (player) => this.props.onStartedPlaying(this.props.id),
+        listener: (props.onStartedPlaying) ?
+                  () => this.props.onStartedPlaying(this.props.id) :
+                  null,
       },
       {
         event: 'paused',
-        listener: () => this.props.onPaused(this.props.id),
+        listener: (props.onStartedPlaying) ?
+                  () => this.props.onPaused(this.props.id) :
+                  null,
       },
       {
         event: 'finishedPlaying',
-        listener: () => this.props.onFinishedPlaying(this.props.id),
+        listener: (props.onFinishedPlaying) ?
+                  () => this.props.onFinishedPlaying(this.props.id) :
+                  null,
       },
       {
         event: 'startedBuffering',
-        listener: () => this.props.onStartedBuffering(this.props.id),
+        listener: (props.onStartedBuffering) ?
+                  () => this.props.onStartedBuffering(this.props.id) :
+                  null,
       },
       {
         event: 'finishedBuffering',
-        listener: () => this.props.onFinishedBuffering(this.props.id),
+        listener: (props.onFinishedBuffering) ?
+                  () => this.props.onFinishedBuffering(this.props.id) :
+                  null,
       },
       {
         event: 'error',
-        listener: () => this.props.onError(this.props.id),
+        listener: (props.onError) ?
+                  () => this.props.onError(this.props.id) :
+                  null,
       },
     ];
 
