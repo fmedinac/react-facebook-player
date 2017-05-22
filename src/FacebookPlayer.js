@@ -1,23 +1,24 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import { string, number, func } from 'prop-types';
 
-class FacebookPlayer extends Component {
+class FacebookPlayer extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
-    className: PropTypes.string,
-    appId: PropTypes.string.isRequired,
-    videoId: PropTypes.string.isRequired,
-    width: PropTypes.number,
-    allowfullscreen: PropTypes.string,
-    autoplay: PropTypes.string,
-    showText: PropTypes.string,
-    showCaptions: PropTypes.string,
-    onReady: PropTypes.func,
-    onStartedPlaying: PropTypes.func,
-    onPaused: PropTypes.func,
-    onFinishedPlaying: PropTypes.func,
-    onStartedBuffering: PropTypes.func,
-    onFinishedBuffering: PropTypes.func,
-    onError: PropTypes.func,
+    id: string,
+    className: string,
+    appId: string.isRequired,
+    videoId: string.isRequired,
+    width: number,
+    allowfullscreen: string,
+    autoplay: string,
+    showText: string,
+    showCaptions: string,
+    onReady: func,
+    onStartedPlaying: func,
+    onPaused: func,
+    onFinishedPlaying: func,
+    onStartedBuffering: func,
+    onFinishedBuffering: func,
+    onError: func
   };
 
   constructor(props) {
