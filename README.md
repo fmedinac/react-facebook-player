@@ -6,7 +6,7 @@ Based on [react-youtube](https://github.com/compedit/react-youtube), this compon
 ## Installation
 
 ```
-$ npm install react-facebook-player
+$ npm install react-facebook-player --save
 ```
 
 ## Usage
