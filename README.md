@@ -15,10 +15,10 @@ $ npm install react-facebook-player --save
 const FacebookPlayer = require('react-facebook-player');
 
 <FacebookPlayer
-  appId={ string }                                    # (required) Your Facebook App ID. Ref: http://bit.ly/1GNA0AN
-  videoId={ string }                                  # (required) Video´s ID Ref: http://bit.ly/1ysgVu4
-  id={ string }                                       # Element ID. Required if you wanna use more than one video in the same page.
-  className={ string }                                # Element class.
+  appId={ string }                                    // (required) Your Facebook App ID. Ref: http://bit.ly/1GNA0AN
+  videoId={ string }                                  // (required) Video´s ID Ref: http://bit.ly/1ysgVu4
+  id={ string }                                       // Element ID. Required if you wanna use more than one video in the same page.
+  className={ string }                                // Element class.
   /* ATTRIBUTES. Ref: http://bit.ly/29OOzWZ */
   allowfullscreen={ string }
   autoplay={ string }
@@ -26,7 +26,7 @@ const FacebookPlayer = require('react-facebook-player');
   showText={ string }
   showCaptions={ string }
   /* EVENTS. Ref: http://bit.ly/29JaA7J */
-  onReady={ function }                                # Returns a player object to be used for controlling
+  onReady={ function }                                // Returns a player object to be used for controlling
   onStartedPlaying={ function }
   onPaused={ function }
   onFinishedPlaying={ function }
