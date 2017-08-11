@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, func } from 'prop-types';
+import { string, number, func, bool } from 'prop-types';
 
 class FacebookPlayer extends React.Component {
   static propTypes = {
@@ -8,10 +8,10 @@ class FacebookPlayer extends React.Component {
     appId: string.isRequired,
     videoId: string.isRequired,
     width: number,
-    allowfullscreen: string,
-    autoplay: string,
-    showText: string,
-    showCaptions: string,
+    allowfullscreen: bool,
+    autoplay: bool,
+    showText: bool,
+    showCaptions: bool,
     onReady: func,
     onStartedPlaying: func,
     onPaused: func,
@@ -20,6 +20,14 @@ class FacebookPlayer extends React.Component {
     onFinishedBuffering: func,
     onError: func,
   };
+
+  static defaultProps = {
+    allowfullscreen: false,
+    autoplay: false,
+    showText: false,
+    showCaptions: false,
+    width: 'auto',
+  }
 
   constructor(props) {
     super(props);
@@ -160,11 +168,11 @@ class FacebookPlayer extends React.Component {
     playerDiv.classList.add('fb-video');
     playerDiv.id = playerId;
     playerDiv.setAttribute('data-href', 'https://www.facebook.com/facebook/videos/' + videoId);
-    playerDiv.setAttribute('data-allowfullscreen', allowfullscreen || 'false');
-    playerDiv.setAttribute('data-autoplay', autoplay || 'false');
-    playerDiv.setAttribute('data-width', width || 'auto');
-    playerDiv.setAttribute('data-show-text', showText || 'false');
-    playerDiv.setAttribute('data-show-captions', showCaptions || 'false');
+    playerDiv.setAttribute('data-allowfullscreen', allowfullscreen);
+    playerDiv.setAttribute('data-autoplay', autoplay);
+    playerDiv.setAttribute('data-width', width);
+    playerDiv.setAttribute('data-show-text', showText);
+    playerDiv.setAttribute('data-show-captions', showCaptions);
 
     this.container.appendChild(playerDiv);
 
