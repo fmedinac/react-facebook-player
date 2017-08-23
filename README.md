@@ -20,11 +20,11 @@ const FacebookPlayer = require('react-facebook-player');
   id={ string }                                       // Element ID. Required if you wanna use more than one video in the same page.
   className={ string }                                // Element class.
   /* ATTRIBUTES. Ref: http://bit.ly/29OOzWZ */
-  allowfullscreen={ string }
-  autoplay={ string }
+  allowfullscreen={ boolean }
+  autoplay={ boolean }
   width={ number }
-  showText={ string }
-  showCaptions={ string }
+  showText={ boolean }
+  showCaptions={ boolean }
   /* EVENTS. Ref: http://bit.ly/29JaA7J */
   onReady={ function }                                // Returns a player object to be used for controlling
   onStartedPlaying={ function }
