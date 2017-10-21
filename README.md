@@ -1,4 +1,4 @@
-react-youtube
+react-facebook-player
 =============================
 
 Based on [react-youtube](https://github.com/compedit/react-youtube), this component makes easier to integrate your [React](http://facebook.github.io/react/) project with [Facebook's Embedded Video Player API](https://developers.facebook.com/docs/plugins/embedded-video-player/api).
