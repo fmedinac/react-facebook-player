@@ -194,7 +194,7 @@ class FacebookPlayer extends React.Component {
         this.videoPlayer = msg.instance;
 
         // Dispatch ready event
-        if (onReady) onReady(id, this.videoPlayer);
+        if (onReady) onReady(this.videoPlayer);
 
         // Subscribe to events
         this.subscribe();
