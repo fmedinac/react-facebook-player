@@ -52,7 +52,7 @@ class Example extends React.Component {
     };
   }
 
-  onReady = (player) => {
+  onReady = (id, player) => {
     this.setState({
       player: player,
     });
