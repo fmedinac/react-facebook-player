@@ -1,3 +1,5 @@
+> This project is deprecated and I don't recommend using it. Please `fork` it and upgrade before using.
+
 react-facebook-player
 =============================
 
